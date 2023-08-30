@@ -1,0 +1,32 @@
+@use "variables" as *;
+
+@import url("https://fonts.googleapis.com/css?family=Poppins:300,400,600,700,800&display=swap");
+
+:root {
+  font-family: Poppins, sans-serif;
+
+  font-size: 16px;
+}
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body {
+  width: 100vw;
+  min-width: 320px;
+  min-height: 100vh;
+  min-height: 100dvh;
+}
+
+h1 {
+  color: $clr-primary;
+  font-size: 1.2rem;
+  font-weight: 800;
+}
+h2 {
+  font-size: 1.2rem;
+  font-weight: 600;
+}

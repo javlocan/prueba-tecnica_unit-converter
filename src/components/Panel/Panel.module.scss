@@ -1,0 +1,55 @@
+@use "../../variables" as *;
+
+.panel {
+  width: 100%;
+
+  color: $clr-neutral;
+  background: $clr-primary;
+
+  padding-block: $pd-mid;
+  padding-inline: $pd-high;
+  border-radius: 21px;
+
+  display: grid;
+  gap: $pd-small;
+  grid-template-rows: 1fr 1fr 1fr;
+  justify-items: start;
+  align-items: center;
+}
+
+.converter {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  font-size: 0.8rem;
+
+  select,
+  input {
+    color: $clr-neutral;
+    background: $clr-primary;
+
+    border: 0;
+    border-bottom: 2px solid $clr-neutral;
+  }
+  input {
+    appearance: none;
+    text-align: end;
+  }
+  *:focus {
+    outline: none;
+  }
+}
+
+.result {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  color: $clr-neutral;
+  font-weight: 700;
+}
+
+button {
+  border: none;
+  background: none;
+}

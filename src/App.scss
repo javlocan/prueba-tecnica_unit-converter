@@ -1,0 +1,42 @@
+@use "variables" as *;
+
+header {
+  position: sticky;
+  display: flex;
+  justify-content: center;
+
+  padding-block: $pd-small;
+  gap: $pd-small;
+
+  box-shadow: 0px 2px 4px 0px #00000040;
+}
+
+section {
+  padding-block: $pd-high;
+}
+
+footer {
+  position: absolute;
+  width: 100%;
+  bottom: 0;
+  background-color: $clr-primary;
+  color: $clr-neutral;
+  display: flex;
+  justify-content: center;
+  padding-block: $pd-mid;
+  gap: 3rem;
+
+  font-size: 0.8rem;
+}
+
+.container {
+  margin: auto;
+  width: $inner-width;
+}
+
+@media (max-width: 600px) {
+  .container {
+    padding-inline: $pd-mid;
+    width: 100%;
+  }
+}
