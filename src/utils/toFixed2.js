@@ -1,6 +1,9 @@
 // DOESN'T WORK PERFECTLY, BUT IT'S BETTER AND IT WAS 10 SECONDS COPYPASTE
 
 export const toFixed2 = (number) => {
+  if (number == 0) {
+    return 0;
+  }
   if (countDecimals(number) >= 2) {
     return number.toFixed(2);
   } else return number;

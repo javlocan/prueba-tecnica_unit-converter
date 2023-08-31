@@ -6,19 +6,25 @@ export const favListSlice = createSlice({
   initialState: [],
   reducers: {
     addFav(state, action) {
-      const id = `${action.payload.firstUnit}${action.payload.firstValue}`;
+      let id = `${action.payload.firstUnit}${action.payload.firstValue}`;
       state.forEach((fav) => {
-        if (fav.id === id) return state;
+        if (fav.id == id) {
+          id = 0;
+          alert("Ups! It's repeated. Try again.");
+        }
       });
-      state.push({
-        id: id,
-        firstValue: action.payload.firstValue,
-        firstUnit: action.payload.firstUnit,
-        secondValue: toFixed2(
-          CONSTANTS[action.payload.firstUnit] * action.payload.firstValue
-        ),
-        secondUnit: SECOND_UNIT[action.payload.firstUnit],
-      });
+
+      if (id !== 0) {
+        state.push({
+          id: id,
+          firstValue: action.payload.firstValue,
+          firstUnit: action.payload.firstUnit,
+          secondValue: toFixed2(
+            CONSTANTS[action.payload.firstUnit] * action.payload.firstValue
+          ),
+          secondUnit: SECOND_UNIT[action.payload.firstUnit],
+        });
+      }
     },
     // ESTO ESTA YENDO FATAL
     // REPASAR BIEN!
@@ -26,7 +32,6 @@ export const favListSlice = createSlice({
     removeFav(state, action) {
       let favN;
       state.forEach((fav, i) => {
-        console.log(fav.id, action.payload.id);
         if (fav.id === action.payload.id) favN = i;
       });
       state.splice(favN, 1);
