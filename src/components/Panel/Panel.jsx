@@ -65,6 +65,7 @@ export const Panel = () => {
         id="unit-value"
         name="unit-value"
         form="form"
+        step="any"
         required
         type="number"
         onChange={(e) => dispatch(setValues({ value: e.target.value }))}
