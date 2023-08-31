@@ -29,12 +29,26 @@ footer {
   font-size: 0.8rem;
 }
 
+nav {
+  width: $inner-width;
+
+  display: flex;
+  flex-direction: row;
+  gap: $pd-small;
+}
+
 .container {
   margin: auto;
   width: $inner-width;
+  display: flex;
+  flex-direction: column;
+  gap: 4rem;
 }
 
 @media (max-width: 600px) {
+  nav {
+    padding-inline: $pd-small;
+  }
   .container {
     padding-inline: $pd-mid;
     width: 100%;

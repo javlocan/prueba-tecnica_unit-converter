@@ -1,62 +1,52 @@
-import { useState } from "react";
+import { useSelector } from "react-redux";
+
 import styles from "./Panel.module.scss";
-import { toFixed2 } from "../../utils/toFixed2";
 
-const CONSTANTS = {
-  wop: 1,
-  "km-mi": 1.8,
-  "mi-km": 0.62,
-  "m-ft": 3.28084,
-  "ft-m": 0.3048,
-  "cm-in": 0.393701,
-  "in-cm": 2.54,
-};
+import { store, setValues, setUnits, addFav } from "../../common/redux";
 
-export const Panel = (props) => {
-  // eslint-disable-next-line react/prop-types
-  const { setNewFav } = props;
-  const [multiplier, setMultiplier] = useState(1);
-  const [value, setValue] = useState("0");
-  const result = toFixed2(value * multiplier);
-
-  const handleSelect = (e) => {
-    setMultiplier(CONSTANTS[e.target.value]);
-  };
+export const Panel = () => {
+  const panel = useSelector((state) => state.panel);
+  const dispatch = store.dispatch;
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    /* la forma: 100 miles to 160 km */
-    const first = window.document.forms[0].elements["unit-value"].value;
-    const units = window.document.forms[0].elements["unit-select"].value;
-    const last = result;
 
-    setNewFav(`${first} ${units} ${last}`);
+    const firstValue = window.document.forms[0].elements["unit-value"].value;
+    const firstUnit = window.document.forms[0].elements["unit-select"].value;
+
+    dispatch(addFav({ firstValue, firstUnit }));
   };
 
   return (
     <div className={styles.panel}>
       <h2>convert</h2>
       <div className={styles.converter}>
-        <form id="form">
-          <select name="unit-select" onChange={(e) => handleSelect(e)}>
-            <option value="wop">--Please choose an option--</option>
-            <option value="km-mi">km → mi</option>
-            <option value="mi-km">mi → km</option>
-            <option value="m-ft">m → ft</option>
-            <option value="ft-m">ft → m</option>
-            <option value="cm-in">cm → in</option>
-            <option value="in-cm">in → cm</option>
+        <form id="form" onSubmit={(e) => handleSubmit(e)}>
+          <select
+            name="unit-select"
+            required
+            onChange={(e) => dispatch(setUnits({ firstUnit: e.target.value }))}
+          >
+            <option value="">--Please choose an option--</option>
+            <option value="km">km → mi</option>
+            <option value="miles">mi → km</option>
+            <option value="m">m → ft</option>
+            <option value="ft">ft → m</option>
+            <option value="cm">cm → in</option>
+            <option value="in">in → cm</option>
           </select>
         </form>
         <input
           name="unit-value"
           form="form"
-          onChange={(e) => setValue(e.target.value)}
+          required
+          onChange={(e) => dispatch(setValues({ value: e.target.value }))}
           placeholder="100"
         ></input>
+        {panel.firstUnit}
       </div>
       <div className={styles.result}>
-        <button type="submit" form="form" onClick={(e) => handleSubmit(e)}>
+        <button type="submit" form="form">
           <svg
             width="24"
             height="24"
@@ -72,7 +62,7 @@ export const Panel = (props) => {
             />
           </svg>
         </button>
-        <span>{result}</span>
+        <span>{panel.result}</span>
       </div>
     </div>
   );
