@@ -11,42 +11,86 @@
   border-radius: 21px;
 
   display: grid;
-  gap: $pd-small;
-  grid-template-rows: 1fr 1fr 1fr;
+  grid-template-columns: 4fr 1fr 4fr 1fr;
+  grid-template-areas: "convert convert convert convert" "select swapo value firstUnit" "favResult favResult favResult secondUnit";
+  column-gap: $pd-small;
+  row-gap: $pd-mid;
+
   justify-items: start;
   align-items: center;
 
   box-shadow: 0px 0px 8px 3px #00000033;
 }
 
-.converter {
+.convert {
+  grid-area: convert;
+}
+.select {
+  width: 100%;
+
+  grid-area: select;
+}
+.swap {
+  grid-area: swapo;
+}
+.value {
+  font-size: 14px;
+  grid-area: value;
+}
+.firstUnit {
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 21px;
+
+  grid-area: firstUnit;
+}
+.favResult {
+  grid-area: favResult;
+
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 36px;
+
   width: 100%;
   display: flex;
-  flex-wrap: wrap;
   justify-content: space-between;
-  font-size: 0.8rem;
-
-  select,
-  input {
-    color: $clr-neutral;
-    background: $clr-primary;
-
-    border: 0;
-    border-bottom: 2px solid $clr-neutral;
-  }
-  input {
-    appearance: none;
-    text-align: end;
-  }
-  *:focus {
-    outline: none;
-  }
 }
 
-.result {
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  color: $clr-neutral;
+.secondUnit {
+  align-self: end;
+  margin-bottom: 4px;
+  font-size: 16px;
   font-weight: 700;
+  line-height: 24px;
+
+  grid-area: secondUnit;
+}
+
+select,
+input {
+  font-size: 14px;
+  width: 100%;
+  color: $clr-neutral;
+  background: $clr-primary;
+  padding-block: 0.1rem;
+  border: 0;
+  border-bottom: 2px solid $clr-neutral;
+}
+input {
+  appearance: none;
+  text-align: end;
+}
+*:focus {
+  outline: none;
+}
+
+@media (max-width: 600px) {
+  .panel {
+    padding: $pd-mid;
+    padding-top: 0.75rem;
+
+    grid-template-columns: 4fr 1fr;
+    grid-template-areas: "convert convert" "select swapo" "value firstUnit" "favResult secondUnit";
+    gap: $pd-mid;
+  }
 }

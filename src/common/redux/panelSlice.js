@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 export const panelSlice = createSlice({
   name: "panel",
-  initialState: { result: 0, value: 0, firstUnit: " " },
+  initialState: { result: 0, value: 0, firstUnit: "" },
   reducers: {
     setValues(state, action) {
       state.value = parseFloat(action.payload.value);
@@ -30,7 +30,7 @@ export const { setValues, setUnits, swapThings } = panelSlice.actions;
 export default panelSlice.reducer;
 
 const CONSTANTS = {
-  " ": 0,
+  "": 0,
   km: 1.8,
   miles: 0.62,
   m: 3.28084,

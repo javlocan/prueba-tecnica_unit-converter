@@ -1,5 +1,7 @@
 import { useSelector } from "react-redux";
 
+import { toFixed2 } from "../../utils";
+
 import styles from "./Panel.module.scss";
 
 import {
@@ -14,7 +16,6 @@ export const Panel = () => {
   const panel = useSelector((state) => state.panel);
   const dispatch = store.dispatch;
 
-  console.log(panel);
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -26,47 +27,54 @@ export const Panel = () => {
 
   return (
     <div className={styles.panel}>
-      <h2>convert</h2>
-      <div className={styles.converter}>
-        <form id="form" onSubmit={(e) => handleSubmit(e)}>
-          <select
-            name="unit-select"
-            required
-            onChange={(e) => dispatch(setUnits({ firstUnit: e.target.value }))}
-          >
-            <option value="">--Please choose an option--</option>
-            <option value="km">km → mi</option>
-            <option value="miles">mi → km</option>
-            <option value="m">m → ft</option>
-            <option value="ft">ft → m</option>
-            <option value="cm">cm → in</option>
-            <option value="in">in → cm</option>
-          </select>
-          <button
-            onClick={(e) => {
-              e.preventDefault();
-              dispatch(swapThings());
-            }}
-          >
-            <SwapIcon />
-          </button>
-        </form>
-        <input
-          id="unit-value"
-          name="unit-value"
-          form="form"
+      <h2 className={styles.convert}>convert</h2>
+
+      <form
+        id="form"
+        onSubmit={(e) => handleSubmit(e)}
+        className={styles.select}
+      >
+        <select
+          name="unit-select"
           required
-          onChange={(e) => dispatch(setValues({ value: e.target.value }))}
-          placeholder="100"
-        ></input>
-        {panel.firstUnit}
-      </div>
-      <div className={styles.result}>
-        <button type="submit" form="form">
+          onChange={(e) => dispatch(setUnits({ firstUnit: e.target.value }))}
+        >
+          <option value="">--Please choose an option--</option>
+          <option value="km">km → mi</option>
+          <option value="miles">mi → km</option>
+          <option value="m">m → ft</option>
+          <option value="ft">ft → m</option>
+          <option value="cm">cm → in</option>
+          <option value="in">in → cm</option>
+        </select>
+      </form>
+      <button
+        className={styles.swap}
+        onClick={(e) => {
+          e.preventDefault();
+          dispatch(swapThings());
+        }}
+      >
+        <SwapIcon />
+      </button>
+
+      <input
+        className={styles.value}
+        id="unit-value"
+        name="unit-value"
+        form="form"
+        required
+        onChange={(e) => dispatch(setValues({ value: e.target.value }))}
+        placeholder="100"
+      ></input>
+      <span className={styles.firstUnit}>{panel.firstUnit}</span>
+      <div className={styles.favResult}>
+        <button type="submit" form="form" id={styles.fav}>
           <FavIcon />
         </button>
-        <span>{panel.result}</span>
+        <span className={styles.result}>{toFixed2(panel.result)}</span>
       </div>
+      <span className={styles.secondUnit}>{SECOND_UNIT[panel.firstUnit]}</span>
     </div>
   );
 };
@@ -106,3 +114,13 @@ const FavIcon = () => (
     />
   </svg>
 );
+
+const SECOND_UNIT = {
+  "": "",
+  km: "miles",
+  miles: "km",
+  m: "ft",
+  ft: "m",
+  cm: "in",
+  in: "cm",
+};
