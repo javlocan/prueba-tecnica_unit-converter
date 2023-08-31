@@ -4,13 +4,12 @@
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: $pd-mid;
+  > h3 {
+    grid-column: span 2;
+  }
 }
 
-.favList > h3 {
-  grid-column: span 2;
-}
-
-.fav {
+.favList .fav {
   color: #676767;
   font-size: 14px;
   line-height: 21px;
@@ -25,7 +24,15 @@
   justify-content: space-between;
 }
 .fav > button {
-  cursor: pointer;
   margin-block: auto;
   margin-right: -10px;
+}
+
+@media (max-width: 600px) {
+  .favList {
+    grid-template-columns: 1fr;
+    > h3 {
+      grid-column: span 1;
+    }
+  }
 }
