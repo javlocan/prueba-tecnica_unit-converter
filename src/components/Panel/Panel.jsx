@@ -1,7 +1,7 @@
 import { useSelector } from "react-redux";
 
 import { toFixed2 } from "../../utils";
-
+import { resetPanel } from "../../common/redux";
 import styles from "./Panel.module.scss";
 
 import {
@@ -23,8 +23,9 @@ export const Panel = () => {
     const firstUnit = window.document.forms[0].elements["unit-select"].value;
 
     dispatch(addFav({ firstValue, firstUnit }));
+    dispatch(resetPanel());
   };
-
+  console.log(panel);
   return (
     <div className={styles.panel}>
       <h2 className={styles.convert}>convert</h2>
@@ -35,6 +36,7 @@ export const Panel = () => {
         className={styles.select}
       >
         <select
+          id="unit-select"
           name="unit-select"
           required
           onChange={(e) => dispatch(setUnits({ firstUnit: e.target.value }))}
@@ -64,6 +66,7 @@ export const Panel = () => {
         name="unit-value"
         form="form"
         required
+        type="number"
         onChange={(e) => dispatch(setValues({ value: e.target.value }))}
         placeholder="100"
       ></input>

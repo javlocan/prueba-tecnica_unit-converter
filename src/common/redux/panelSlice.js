@@ -23,10 +23,18 @@ export const panelSlice = createSlice({
         firstUnit: SECOND_UNIT[state.firstUnit],
       };
     },
+    resetPanel(state) {
+      window.document.getElementById("unit-select").value = "";
+      window.document.getElementById("unit-value").value = 0;
+      state.value = 0;
+      state.result = 0;
+      state.firstUnit = "";
+    },
   },
 });
 
-export const { setValues, setUnits, swapThings } = panelSlice.actions;
+export const { setValues, setUnits, swapThings, resetPanel } =
+  panelSlice.actions;
 export default panelSlice.reducer;
 
 const CONSTANTS = {

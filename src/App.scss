@@ -1,7 +1,6 @@
 @use "variables" as *;
 
 header {
-  position: sticky;
   display: flex;
   justify-content: center;
 
@@ -12,18 +11,19 @@ header {
 }
 
 section {
+  z-index: 1;
   padding-block: $pd-high;
 }
 
 footer {
-  position: absolute;
+  position: fixed;
   width: 100%;
   bottom: 0;
   background-color: $clr-primary;
   color: $clr-neutral;
   display: flex;
   justify-content: center;
-  padding-block: $pd-mid;
+  padding-block: 0.75rem;
   gap: 3rem;
 
   font-size: 0.8rem;

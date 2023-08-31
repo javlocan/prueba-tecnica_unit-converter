@@ -1,9 +1,17 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { toFixed2 } from "../../utils";
 
+const getInitialState = () => {
+  const favList = window.localStorage.getItem("fav-list");
+  if (favList !== undefined) {
+    return JSON.parse(favList);
+  }
+  return [];
+};
+
 export const favListSlice = createSlice({
   name: "favList",
-  initialState: [],
+  initialState: getInitialState(),
   reducers: {
     addFav(state, action) {
       let id = `${action.payload.firstUnit}${action.payload.firstValue}`;

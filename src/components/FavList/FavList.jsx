@@ -1,11 +1,19 @@
 /* eslint-disable react/prop-types */
 
+import { useEffect } from "react";
 import { removeFav } from "../../common/redux";
 import styles from "./FavList.module.scss";
 
 import { useSelector, useStore } from "react-redux";
 export const FavList = () => {
   const favList = useSelector((state) => state.favList);
+
+  useEffect(() => {
+    const localList = window.localStorage.getItem("fav-list");
+    if (favList !== localList) {
+      window.localStorage.setItem("fav-list", JSON.stringify(favList));
+    }
+  }, [favList]);
 
   return (
     <div className={styles.favList}>
