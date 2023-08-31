@@ -10,6 +10,7 @@ export const FavList = () => {
 
   useEffect(() => {
     const localList = window.localStorage.getItem("fav-list");
+    console.log(localList, favList);
     if (favList !== localList) {
       window.localStorage.setItem("fav-list", JSON.stringify(favList));
     }

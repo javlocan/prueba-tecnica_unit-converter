@@ -25,7 +25,7 @@ export const Panel = () => {
     dispatch(addFav({ firstValue, firstUnit }));
     dispatch(resetPanel());
   };
-  console.log(panel);
+
   return (
     <div className={styles.panel}>
       <h2 className={styles.convert}>convert</h2>

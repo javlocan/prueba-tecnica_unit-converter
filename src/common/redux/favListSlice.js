@@ -3,7 +3,8 @@ import { toFixed2 } from "../../utils";
 
 const getInitialState = () => {
   const favList = window.localStorage.getItem("fav-list");
-  if (favList !== undefined) {
+  console.log(favList);
+  if (favList !== null) {
     return JSON.parse(favList);
   }
   return [];
